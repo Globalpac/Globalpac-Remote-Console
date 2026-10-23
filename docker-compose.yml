@@ -9,7 +9,7 @@ services:
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
       DB_TYPE: sqlite
     volumes:
-      - ./data:/data
+      - ${DATA_DIR:-./data}:/data
 
   rustdesk-console-web:
     build:
