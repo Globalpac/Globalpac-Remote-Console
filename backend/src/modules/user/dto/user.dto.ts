@@ -1,0 +1,193 @@
+import {
+  IsString,
+  IsOptional,
+  IsBoolean,
+  IsEnum,
+  IsArray,
+  MinLength,
+  IsUUID,
+  IsEmail,
+} from 'class-validator';
+import { UserStatus } from '../entities/user.entity';
+import { PaginationQueryDto } from '../../../common/dto/pagination.dto';
+
+export class CreateUserDto {
+  @IsString()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  display_name?: string;
+
+  @IsString()
+  password: string;
+
+  @IsString()
+  @IsOptional()
+  group_name?: string;
+
+  @IsUUID('4')
+  @IsOptional()
+  user_group_guid?: string;
+
+  @IsString()
+  @IsOptional()
+  email?: string;
+
+  @IsString()
+  @IsOptional()
+  note?: string;
+}
+
+export class InviteUserDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  display_name?: string;
+
+  @IsString()
+  @IsOptional()
+  group_name?: string;
+
+  @IsUUID('4')
+  @IsOptional()
+  user_group_guid?: string;
+
+  @IsString()
+  @IsOptional()
+  note?: string;
+}
+
+export class AcceptInvitationDto {
+  @IsString()
+  token: string;
+
+  @IsString()
+  @MinLength(6)
+  password: string;
+}
+
+export class VerifyInvitationDto {
+  @IsString()
+  token: string;
+}
+
+export class UpdateUserDto {
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @IsString()
+  @IsOptional()
+  display_name?: string;
+
+  @IsString()
+  @IsOptional()
+  email?: string;
+
+  @IsString()
+  @IsOptional()
+  note?: string;
+
+  @IsEnum(UserStatus)
+  @IsOptional()
+  status?: UserStatus;
+
+  @IsBoolean()
+  @IsOptional()
+  is_admin?: boolean;
+
+  @IsUUID('4')
+  @IsOptional()
+  user_group_guid?: string;
+}
+
+export class UpdateUserSecurityDto {
+  @IsBoolean()
+  @IsOptional()
+  tfa_enforce?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  email_verification?: boolean;
+
+  @IsString()
+  @IsOptional()
+  @MinLength(6)
+  new_password?: string;
+}
+
+export class UpdateCurrentUserDto {
+  @IsString()
+  @IsOptional()
+  display_name?: string;
+
+  @IsString()
+  @IsOptional()
+  email?: string;
+
+  @IsString()
+  @IsOptional()
+  note?: string;
+}
+
+export class UserQueryDto extends PaginationQueryDto {
+  @IsString()
+  @IsOptional()
+  accessible?: string;
+
+  @IsString()
+  @IsOptional()
+  status?: string;
+
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @IsString()
+  @IsOptional()
+  group_name?: string;
+}
+
+export class BatchStatusDto {
+  @IsArray()
+  @IsString({ each: true })
+  user_guids: string[];
+
+  @IsEnum(UserStatus)
+  status: UserStatus;
+}
+
+export class BatchSecurityDto {
+  @IsArray()
+  @IsString({ each: true })
+  user_guids: string[];
+
+  @IsBoolean()
+  @IsOptional()
+  tfa_enforce?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  email_verification?: boolean;
+}
+
+export class BatchSessionsDto {
+  @IsArray()
+  @IsString({ each: true })
+  user_guids: string[];
+}
+
+export class ChangePasswordDto {
+  @IsString()
+  current_password: string;
+
+  @IsString()
+  @MinLength(6)
+  new_password: string;
+}

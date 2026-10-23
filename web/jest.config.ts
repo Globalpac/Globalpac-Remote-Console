@@ -1,0 +1,24 @@
+import { configUmiAlias, createConfig } from '@umijs/max/test.js';
+
+export default async (): Promise<any> => {
+  const config = await configUmiAlias({
+    ...createConfig({
+      target: 'browser',
+    }),
+  });
+  return {
+    ...config,
+    testEnvironmentOptions: {
+      ...(config?.testEnvironmentOptions || {}),
+      url: 'http://localhost:8000',
+    },
+    setupFiles: [
+      ...(config.setupFiles || []),
+      '<rootDir>/tests/browser-environment.ts',
+    ],
+    globals: {
+      ...config.globals,
+      localStorage: null,
+    },
+  };
+};

@@ -1,0 +1,32 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { OidcController } from './controllers/oidc.controller';
+import { OidcAdminController } from './controllers/oidc-admin.controller';
+import { OidcService } from './services/oidc.service';
+import { OidcAdminService } from './services/oidc-admin.service';
+import { OidcAuthStateCleanupService } from './services/oidc-auth-state-cleanup.service';
+import { OidcProvider } from './entities/oidc-provider.entity';
+import { OidcAuthState } from './entities/oidc-auth-state.entity';
+import { User } from '../user/entities/user.entity';
+import { AuthModule } from '../auth/auth.module';
+import { UserGroupModule } from '../user-group/user-group.module';
+import { SettingsModule } from '../settings/settings.module';
+import { AdminGuard } from '../../common/guards/admin.guard';
+
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([OidcProvider, OidcAuthState, User]),
+    AuthModule,
+    UserGroupModule,
+    SettingsModule,
+  ],
+  controllers: [OidcController, OidcAdminController],
+  providers: [
+    OidcService,
+    OidcAdminService,
+    OidcAuthStateCleanupService,
+    AdminGuard,
+  ],
+  exports: [OidcService],
+})
+export class OidcModule {}

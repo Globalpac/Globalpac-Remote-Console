@@ -1,0 +1,89 @@
+import { defineConfig } from '@umijs/max';
+import defaultSettings from './defaultSettings';
+import proxy from './proxy';
+import routes from './routes';
+import { version } from '../package.json';
+import path from 'node:path';
+
+const { buildIdentity } = require('../scripts/build-identity.cjs');
+
+const {
+  REACT_APP_ENV = 'dev',
+  REACT_APP_HISTORY_TYPE = 'browser',
+  REACT_APP_PUBLIC_PATH = '/',
+} = process.env;
+
+const PUBLIC_PATH = REACT_APP_PUBLIC_PATH.endsWith('/')
+  ? REACT_APP_PUBLIC_PATH
+  : `${REACT_APP_PUBLIC_PATH}/`;
+
+const config: ReturnType<typeof defineConfig> = defineConfig({
+  hash: true,
+  codeSplitting: {
+    jsStrategy: 'granularChunks',
+  },
+  base: PUBLIC_PATH,
+  publicPath: PUBLIC_PATH,
+  history: {
+    type: REACT_APP_HISTORY_TYPE as 'browser' | 'hash',
+  },
+  routes,
+  ignoreMomentLocale: true,
+  proxy: proxy[REACT_APP_ENV as keyof typeof proxy],
+  fastRefresh: true,
+  model: {},
+  initialState: {},
+  title: 'Globalpac Console',
+  favicons: [`${PUBLIC_PATH}logo.svg`],
+  layout: {
+    locale: true,
+    ...defaultSettings,
+  },
+  moment2dayjs: {
+    preset: 'antd',
+    plugins: ['duration'],
+  },
+  locale: {
+    default: 'pt-BR',
+    antd: true,
+    baseNavigator: true,
+  },
+  antd: {
+    appConfig: {},
+    configProvider: {
+      theme: {
+        cssVar: true,
+        token: {
+          fontFamily:
+            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+        },
+      },
+    },
+  },
+  request: {},
+  access: {},
+  headScripts: [{ src: `${PUBLIC_PATH}scripts/loading.js`, async: true }],
+  links: [{ rel: 'manifest', href: `${PUBLIC_PATH}manifest.json` }],
+  metas: [
+    { name: 'theme-color', content: '#1890ff' },
+    { name: 'application-name', content: 'Globalpac Console' },
+    { name: 'apple-mobile-web-app-capable', content: 'yes' },
+    { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+    { name: 'apple-mobile-web-app-title', content: 'Globalpac Console' },
+    { name: 'mobile-web-app-capable', content: 'yes' },
+  ],
+  presets: ['umi-presets-pro'],
+  mock: false,
+  mako: {},
+  devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+  esbuildMinifyIIFE: true,
+  requestRecord: {},
+  define: {
+    APP_PUBLIC_PATH: PUBLIC_PATH,
+    WEB_CLIENT_BUILD_ID: buildIdentity(path.resolve(__dirname, '..')),
+    'process.env.CI': process.env.CI,
+    FRONTEND_VERSION: version,
+  },
+});
+
+export default config;

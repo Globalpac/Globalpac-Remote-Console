@@ -1,0 +1,77 @@
+import { request } from '@umijs/max';
+
+export async function login(body: API.LoginParams) {
+  return request<API.LoginResponse>('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: body,
+    skipErrorHandler: true,
+  });
+}
+
+export async function logout(
+  body?: { id?: string; uuid?: string },
+  token?: string,
+) {
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return request('/api/logout', {
+    method: 'POST',
+    data: body,
+    headers,
+  });
+}
+
+export async function currentUser() {
+  return request<API.CurrentUser>('/api/currentUser', { method: 'POST' });
+}
+
+export async function getLoginOptions() {
+  return request<string[]>('/api/login-options', {
+    method: 'GET',
+  });
+}
+
+export async function requestPasswordReset(body: {
+  username_or_email: string;
+}) {
+  return request<{ message: string }>('/api/password-reset/request', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: body,
+    skipErrorHandler: true,
+  });
+}
+
+export async function validateResetToken(body: { token: string }) {
+  return request<API.ResetTokenInfo>('/api/password-reset/validate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: body,
+    skipErrorHandler: true,
+  });
+}
+
+export async function confirmPasswordReset(body: {
+  token: string;
+  new_password: string;
+}) {
+  return request<{ message: string }>('/api/password-reset/confirm', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: body,
+    skipErrorHandler: true,
+  });
+}
+
+export async function oidcAuth(body: API.OidcAuthParams) {
+  return request<API.OidcAuthResponse>('/api/oidc/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: body,
+  });
+}
+
+export const getCurrentUser = currentUser;

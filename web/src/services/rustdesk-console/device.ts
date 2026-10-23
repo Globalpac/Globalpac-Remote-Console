@@ -1,0 +1,73 @@
+import { request } from '@umijs/max';
+
+export async function getDeviceList(
+  params: API.DeviceListParams,
+  options?: Record<string, unknown>,
+) {
+  return request<API.PaginatedResult<API.DeviceItem>>('/api/peers', {
+    method: 'GET',
+    params,
+    ...(options || {}),
+  });
+}
+
+export async function getAdminDeviceList(
+  params: API.AdminDeviceListParams,
+  options?: Record<string, unknown>,
+) {
+  return request<API.PaginatedResult<API.DeviceItem>>('/api/devices', {
+    method: 'GET',
+    params,
+    ...(options || {}),
+  });
+}
+
+export async function batchUpdateDeviceStatus(params: {
+  guids: string[];
+  status: 'enabled' | 'disabled';
+}) {
+  const response = await request<{
+    success: boolean;
+    data: {
+      succeeded: string[];
+      failed: Array<{ guid: string; reason: string }>;
+      total: number;
+      succeededCount: number;
+      failedCount: number;
+    };
+  }>('/api/devices/status', {
+    method: 'PATCH',
+    data: params,
+  });
+
+  const data = response?.data;
+  if (
+    !response ||
+    typeof response !== 'object' ||
+    !data ||
+    !Array.isArray(data.succeeded) ||
+    !Array.isArray(data.failed) ||
+    typeof data.total !== 'number' ||
+    typeof data.succeededCount !== 'number' ||
+    typeof data.failedCount !== 'number'
+  ) {
+    throw new Error('Invalid batch device status response');
+  }
+  return data;
+}
+
+export async function deleteDevice(guid: string) {
+  return request(`/api/devices/${guid}`, { method: 'DELETE' });
+}
+
+export async function updateDevice(
+  guid: string,
+  data: API.UpdateDeviceParams,
+) {
+  return request(`/api/devices/${guid}`, {
+    method: 'PATCH',
+    data,
+  });
+}
+
+

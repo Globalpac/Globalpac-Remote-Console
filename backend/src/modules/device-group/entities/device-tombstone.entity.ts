@@ -1,0 +1,56 @@
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  PrimaryColumn,
+} from 'typeorm';
+
+/**
+ * Tombstone for a deleted device.
+ *
+ * Deleting a peer used to be reversible by a single heartbeat: the heartbeat
+ * handler recreated unknown devices on sight. A tombstone marks the device as
+ * deliberately removed so heartbeats no longer resurrect it; restoring the
+ * tombstone re-admits the device.
+ */
+@Entity('device_tombstones')
+@Index('IDX_device_tombstones_deviceId', ['deviceId'])
+export class DeviceTombstone {
+  /** Device UUID (same identifier as Peer.uuid) */
+  @PrimaryColumn()
+  uuid: string;
+
+  /** Last known RustDesk device id at deletion time */
+  @Column()
+  deviceId: string;
+
+  /** Whether the device id was also banned at the hbbs admission layer */
+  @Column({ default: false })
+  banned: boolean;
+
+  /**
+   * Whether the operator asked for the device id to be freed from the hbbs
+   * peer registry at deletion time (independent of whether it succeeded).
+   * A restore only retries the release when this is true: an explicit
+   * opt-out must survive the deletion.
+   */
+  @Column({ default: false })
+  releaseRequested: boolean;
+
+  /**
+   * Whether the device id was actually freed from the hbbs peer registry.
+   * A restore only retries a requested release while this is false: once
+   * freed, a replacement machine may have claimed the id, and releasing
+   * again would destroy its binding.
+   */
+  @Column({ default: false })
+  idReleased: boolean;
+
+  /** Actor that deleted the device */
+  @Column({ type: 'varchar', nullable: true })
+  deletedBy: string | null;
+
+  @CreateDateColumn()
+  createdAt: Date;
+}

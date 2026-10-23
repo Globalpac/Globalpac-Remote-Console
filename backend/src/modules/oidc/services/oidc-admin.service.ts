@@ -1,0 +1,266 @@
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
+import * as client from 'openid-client';
+import {
+  OidcProvider,
+  OidcProviderType,
+} from '../entities/oidc-provider.entity';
+import { OidcService } from './oidc.service';
+import {
+  CreateOidcProviderDto,
+  UpdateOidcProviderDto,
+  OidcProviderQueryDto,
+} from '../dto/oidc-provider.dto';
+
+@Injectable()
+export class OidcAdminService {
+  private readonly logger = new Logger(OidcAdminService.name);
+
+  constructor(
+    @InjectRepository(OidcProvider)
+    private providerRepository: Repository<OidcProvider>,
+    private readonly oidcService: OidcService,
+  ) {}
+
+  async findAll(query: OidcProviderQueryDto) {
+    const { current = 1, pageSize = 20 } = query;
+    const skip = (current - 1) * pageSize;
+
+    const [data, total] = await this.providerRepository
+      .createQueryBuilder('provider')
+      .orderBy('provider.priority', 'ASC')
+      .addOrderBy('provider.name', 'ASC')
+      .skip(skip)
+      .take(pageSize)
+      .getManyAndCount();
+
+    return { data, total };
+  }
+
+  async findOne(guid: string): Promise<OidcProvider> {
+    const provider = await this.providerRepository
+      .createQueryBuilder('provider')
+      .where('provider.guid = :guid', { guid })
+      .addSelect('provider.clientSecret')
+      .getOne();
+
+    if (!provider) {
+      throw new NotFoundException(`OIDC provider "${guid}" does not exist`);
+    }
+
+    return provider;
+  }
+
+  async create(dto: CreateOidcProviderDto): Promise<OidcProvider> {
+    const existing = await this.providerRepository.findOne({
+      where: { name: dto.name },
+    });
+
+    if (existing) {
+      throw new BadRequestException(
+        `OIDC provider name "${dto.name}" already exists`,
+      );
+    }
+
+    const provider = new OidcProvider();
+    provider.guid = uuidv4();
+    provider.type = dto.type || OidcProviderType.OIDC;
+    provider.name = dto.name;
+    provider.issuer = dto.issuer;
+    provider.clientId = dto.clientId;
+    provider.clientSecret = (dto.clientSecret || null) as string;
+    provider.scope =
+      dto.scope ||
+      (provider.type === OidcProviderType.OAUTH2
+        ? 'read:user user:email'
+        : 'openid email profile');
+    provider.authorizationEndpoint = (dto.authorizationEndpoint ||
+      null) as string;
+    provider.tokenEndpoint = (dto.tokenEndpoint || null) as string;
+    provider.userinfoEndpoint = (dto.userinfoEndpoint || null) as string;
+    provider.jwksUri = (dto.jwksUri || null) as string;
+    provider.icon = (dto.icon || null) as string;
+    provider.enabled = dto.enabled !== undefined ? dto.enabled : true;
+
+    await this.providerRepository.save(provider);
+    this.logger.log(`OIDC provider created successfully: ${dto.name}`);
+    return provider;
+  }
+
+  async update(
+    guid: string,
+    dto: UpdateOidcProviderDto,
+  ): Promise<OidcProvider> {
+    const provider = await this.providerRepository.findOne({
+      where: { guid },
+    });
+
+    if (!provider) {
+      throw new NotFoundException(`OIDC provider "${guid}" does not exist`);
+    }
+
+    if (dto.name && dto.name !== provider.name) {
+      const existing = await this.providerRepository.findOne({
+        where: { name: dto.name },
+      });
+      if (existing) {
+        throw new BadRequestException(
+          `OIDC provider name "${dto.name}" already exists`,
+        );
+      }
+    }
+
+    const oldIssuer = provider.issuer;
+
+    Object.assign(provider, {
+      ...(dto.type !== undefined && { type: dto.type }),
+      ...(dto.name !== undefined && { name: dto.name }),
+      ...(dto.issuer !== undefined && { issuer: dto.issuer }),
+      ...(dto.clientId !== undefined && { clientId: dto.clientId }),
+      ...(dto.clientSecret !== undefined && { clientSecret: dto.clientSecret }),
+      ...(dto.scope !== undefined && { scope: dto.scope }),
+      ...(dto.authorizationEndpoint !== undefined && {
+        authorizationEndpoint: dto.authorizationEndpoint,
+      }),
+      ...(dto.tokenEndpoint !== undefined && {
+        tokenEndpoint: dto.tokenEndpoint,
+      }),
+      ...(dto.userinfoEndpoint !== undefined && {
+        userinfoEndpoint: dto.userinfoEndpoint,
+      }),
+      ...(dto.jwksUri !== undefined && { jwksUri: dto.jwksUri }),
+      ...(dto.icon !== undefined && { icon: dto.icon }),
+      ...(dto.enabled !== undefined && { enabled: dto.enabled }),
+    });
+
+    await this.providerRepository.save(provider);
+
+    if (dto.issuer !== undefined && dto.issuer !== oldIssuer) {
+      this.oidcService.clearConfigCache(oldIssuer);
+    }
+    this.oidcService.clearConfigCache(provider.issuer);
+
+    this.logger.log(`OIDC provider updated successfully: ${provider.name}`);
+    return provider;
+  }
+
+  async sort(guids: string[]): Promise<void> {
+    const existingProviders = await this.providerRepository.find({
+      where: guids.map((guid) => ({ guid })),
+    });
+
+    if (existingProviders.length !== guids.length) {
+      const existingGuids = new Set(existingProviders.map((p) => p.guid));
+      const invalidGuids = guids.filter((g) => !existingGuids.has(g));
+      throw new BadRequestException(
+        `The following OIDC providers do not exist: ${invalidGuids.join(', ')}`,
+      );
+    }
+
+    for (const provider of existingProviders) {
+      const priority = guids.indexOf(provider.guid);
+      if (provider.priority !== priority) {
+        await this.providerRepository.update(
+          { guid: provider.guid },
+          { priority },
+        );
+      }
+    }
+    this.logger.log(`OIDC provider order updated`);
+  }
+
+  async remove(guid: string): Promise<void> {
+    const provider = await this.providerRepository.findOne({
+      where: { guid },
+    });
+
+    if (!provider) {
+      throw new NotFoundException(`OIDC provider "${guid}" does not exist`);
+    }
+
+    this.oidcService.clearConfigCache(provider.issuer);
+    await this.providerRepository.remove(provider);
+    this.logger.log(`OIDC provider deleted successfully: ${provider.name}`);
+  }
+
+  async toggle(guid: string, enabled: boolean): Promise<OidcProvider> {
+    const provider = await this.providerRepository.findOne({
+      where: { guid },
+    });
+
+    if (!provider) {
+      throw new NotFoundException(`OIDC provider "${guid}" does not exist`);
+    }
+
+    provider.enabled = enabled;
+    await this.providerRepository.save(provider);
+    this.logger.log(
+      `OIDC provider ${provider.name} ${enabled ? 'enabled' : 'disabled'}`,
+    );
+    return provider;
+  }
+
+  async testConnection(guid: string): Promise<{
+    success: boolean;
+    message: string;
+    endpoints?: Record<string, string>;
+  }> {
+    const provider = await this.providerRepository
+      .createQueryBuilder('provider')
+      .where('provider.guid = :guid', { guid })
+      .addSelect('provider.clientSecret')
+      .getOne();
+
+    if (!provider) {
+      throw new NotFoundException(`OIDC provider "${guid}" does not exist`);
+    }
+
+    try {
+      const config = await client.discovery(
+        new URL(provider.issuer),
+        provider.clientId,
+        provider.clientSecret || undefined,
+      );
+
+      const metadata = config.serverMetadata();
+      const endpoints: Record<string, string> = {};
+
+      if (metadata.authorization_endpoint) {
+        endpoints.authorization_endpoint = metadata.authorization_endpoint;
+      }
+      if (metadata.token_endpoint) {
+        endpoints.token_endpoint = metadata.token_endpoint;
+      }
+      if (metadata.userinfo_endpoint) {
+        endpoints.userinfo_endpoint = metadata.userinfo_endpoint;
+      }
+      if (metadata.jwks_uri) {
+        endpoints.jwks_uri = metadata.jwks_uri;
+      }
+
+      this.oidcService.clearConfigCache(provider.issuer);
+
+      return {
+        success: true,
+        message: `Discovery validation succeeded, ${Object.keys(endpoints).length} endpoints found`,
+        endpoints,
+      };
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      this.logger.warn(
+        `OIDC Discovery test failed for ${provider.name}: ${message}`,
+      );
+      return {
+        success: false,
+        message: `Discovery validation failed: ${message}`,
+      };
+    }
+  }
+}

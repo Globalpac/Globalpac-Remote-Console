@@ -1,0 +1,27 @@
+import webClient from './en-US/webClient';
+import component from './en-US/component';
+import globalHeader from './en-US/globalHeader';
+import menu from './en-US/menu';
+import pages from './en-US/pages';
+import pwa from './en-US/pwa';
+import settingDrawer from './en-US/settingDrawer';
+import settings from './en-US/settings';
+
+export default {
+  ...serverNetwork,
+  ...webClient,
+  'navBar.lang': 'Languages',
+  'layout.user.link.help': 'Help',
+  'layout.user.link.privacy': 'Privacy',
+  'layout.user.link.terms': 'Terms',
+  'layout.user.logout': 'Logout',
+  'layout.user.accountCenter': 'Account Center',
+  ...globalHeader,
+  ...menu,
+  ...settingDrawer,
+  ...settings,
+  ...pwa,
+  ...component,
+  ...pages,
+};
+import serverNetwork from './en-US/serverNetwork';
