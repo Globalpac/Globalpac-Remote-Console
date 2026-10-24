@@ -5,7 +5,7 @@ Console web de administração do acesso remoto da Globalpac. É um fork AGPL-3.
 - `backend/` — API NestJS
 - `web/` — interface
 
-A conta criada num banco vazio é `globalpac` / `console@globalpac.com.br`. A senha vem de `ADMIN_PASSWORD`. Sem essa variável, a senha inicial é `globalpac` e deve ser trocada no primeiro acesso.
+Num banco vazio é criada uma conta de administrador. Defina a senha em `ADMIN_PASSWORD` antes do primeiro arranque e troque-a no primeiro acesso.
 
 O idioma padrão é português (`pt-BR`). A marca d'água da tela é o nome do usuário logado.
 
