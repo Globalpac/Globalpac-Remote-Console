@@ -50,6 +50,13 @@ export default [
     component: './devices',
   },
   {
+    path: '/remoto',
+    name: 'remoto',
+    icon: 'download',
+    access: 'canAdmin',
+    component: './remoto',
+  },
+  {
     path: '/web-client',
     name: 'webClient',
     icon: 'global',

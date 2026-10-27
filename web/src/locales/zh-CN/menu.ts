@@ -25,6 +25,7 @@ export default {
   'menu.settings.ldap': 'LDAP 配置',
   'menu.settings.webClient': '网页客户端',
   'menu.settings.serverManagement': '服务器管理连接',
+  'menu.remoto': '远程访问',
   'menu.customClients': '自定义客户端',
   'menu.list.audit-list': '审计列表',
   'menu.list.audit-list.File': '文件传输',

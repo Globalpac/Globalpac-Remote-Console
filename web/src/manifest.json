@@ -1,8 +1,19 @@
 {
-  "name": "RustDesk Console",
-  "short_name": "RustDesk Console",
+  "name": "Globalpac Console",
+  "short_name": "Globalpac",
   "display": "standalone",
-  "start_url": "./?utm_source=homescreen",
-  "theme_color": "#002140",
-  "background_color": "#001529"
+  "start_url": "./",
+  "scope": "./",
+  "lang": "pt-BR",
+  "id": "globalpac-console",
+  "theme_color": "#1890ff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }

@@ -25,6 +25,7 @@ export default {
   'menu.settings.ldap': 'Настройки LDAP',
   'menu.settings.webClient': 'Веб-клиент',
   'menu.settings.serverManagement': 'Управление серверами',
+  'menu.remoto': 'Удаленный доступ',
   'menu.customClients': 'Пользовательские клиенты',
   'menu.list.audit-list': 'Список аудита',
   'menu.list.audit-list.File': 'Передача файлов',

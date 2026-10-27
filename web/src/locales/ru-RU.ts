@@ -3,6 +3,7 @@ import component from './ru-RU/component';
 import globalHeader from './ru-RU/globalHeader';
 import menu from './ru-RU/menu';
 import pages from './ru-RU/pages';
+import remoto from './ru-RU/remoto';
 import pwa from './ru-RU/pwa';
 import settingDrawer from './ru-RU/settingDrawer';
 import settings from './ru-RU/settings';
@@ -23,5 +24,6 @@ export default {
   ...pwa,
   ...component,
   ...pages,
+  ...remoto,
 };
 import serverNetwork from './ru-RU/serverNetwork';
