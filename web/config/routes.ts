@@ -33,6 +33,7 @@ export default [
     name: 'dashboard',
     icon: 'dashboard',
     access: 'canDashboardView',
+    hideInMenu: true,
     component: './dashboard',
   },
   {
@@ -40,6 +41,7 @@ export default [
     name: 'servers',
     icon: 'cloudServer',
     access: 'canServersView',
+    hideInMenu: true,
     component: './servers',
   },
   {
@@ -61,12 +63,14 @@ export default [
     name: 'webClient',
     icon: 'global',
     access: 'canWebClientConnect',
+    hideInMenu: true,
     component: './web-client',
   },
   {
     path: '/address-book',
     name: 'addressBook',
     icon: 'contacts',
+    hideInMenu: true,
     routes: [
       {
         path: '/address-book',
@@ -97,6 +101,7 @@ export default [
     name: 'groups',
     icon: 'team',
     access: 'canGroups',
+    hideInMenu: true,
     routes: [
       {
         path: '/groups',
@@ -144,6 +149,7 @@ export default [
     name: 'roles',
     icon: 'audit',
     access: 'canRolesView',
+    hideInMenu: true,
     component: './roles',
   },
   {
@@ -175,6 +181,7 @@ export default [
         icon: 'alert',
         path: '/audits/alarm',
         access: 'canAuditView',
+        hideInMenu: true,
         component: './audits/alarm',
       },
       {
@@ -182,6 +189,7 @@ export default [
         icon: 'code',
         path: '/audits/console',
         access: 'canAuditView',
+        hideInMenu: true,
         component: './audits/console',
       },
     ],
@@ -191,6 +199,7 @@ export default [
     name: 'strategies',
     icon: 'solution',
     access: 'canStrategiesAccess',
+    hideInMenu: true,
     component: './strategy',
   },
   {
@@ -198,6 +207,7 @@ export default [
     name: 'customClients',
     icon: 'form',
     access: 'canAdmin',
+    hideInMenu: true,
     component: './custom-client',
   },
   {
@@ -220,37 +230,42 @@ export default [
         name: 'smtp',
         icon: 'mail',
         path: '/settings/smtp',
+        hideInMenu: true,
         component: './settings/smtp',
       },
       {
         name: 'oidcProviders',
         icon: 'safety',
         path: '/settings/oidc-providers',
+        hideInMenu: true,
         component: './settings/oidc-providers',
       },
       {
         name: 'ldap',
         icon: 'safety',
         path: '/settings/ldap',
+        hideInMenu: true,
         component: './settings/ldap',
       },
       {
         name: 'webClient',
         icon: 'global',
         path: '/settings/web-client',
+        hideInMenu: true,
         component: './settings/web-client',
       },
       {
         name: 'serverManagement',
         icon: 'cloudServer',
         path: '/settings/server-management',
+        hideInMenu: true,
         component: './settings/server-management',
       },
     ],
   },
   {
     path: '/',
-    redirect: '/address-book/personal',
+    redirect: '/devices',
   },
   {
     component: '404',
