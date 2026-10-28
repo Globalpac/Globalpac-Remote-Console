@@ -371,9 +371,9 @@ export default {
   'webClient.legacyRisk':
     'A conexão é criptografada, mas o método antigo tem um risco conhecido que pode reduzir a privacidade do conteúdo transferido.',
   'webClient.legacyUpgrade':
-    'Atualize o RustDesk no dispositivo remoto e reconecte.',
+    'Atualize o cliente no dispositivo remoto e reconecte.',
   'webClient.legacyCompatibility':
-    'O RustDesk 1.4.9 usa o método antigo. O novo foi verificado em uma compilação oficial específica 1.5.0 nightly. Nightly é uma versão de desenvolvimento; o número da versão não garante a correção.',
+    'A versão 1.4.9 usa o método antigo. O novo foi verificado em uma compilação oficial específica 1.5.0 nightly. Nightly é uma versão de desenvolvimento; o número da versão não garante a correção.',
   'webClient.cancelConnection': 'Cancelar conexão',
   'webClient.localFiles': 'Arquivos locais',
   'webClient.localChooseFolder': 'Escolher pasta',

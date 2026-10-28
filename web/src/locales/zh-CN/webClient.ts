@@ -334,7 +334,7 @@ export default {
   'webClient.remoteVersion': '远端客户端',
   'webClient.legacyRisk':
     '连接仍已加密，但旧版方案存在已知风险，可能降低传输内容的保密性。',
-  'webClient.legacyUpgrade': '建议更新远端 RustDesk 后重新连接。',
+  'webClient.legacyUpgrade': '建议更新远端客户端后重新连接。',
   'webClient.legacyCompatibility':
     '1.4.9 为旧方案。已验证的官方 1.5.0 nightly 支持新方案；nightly 是开发版，不能只凭版本号判断。',
   'webClient.cancelConnection': '取消连接',

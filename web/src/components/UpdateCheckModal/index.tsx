@@ -25,7 +25,24 @@ import { matchingReleaseNotes } from '@/services/rustdesk-console/updateReleaseN
 import type { SystemUpdateView } from './useSystemUpdate';
 
 const { Paragraph, Text, Link } = Typography;
-const manualUrl = 'https://github.com/databk/rustdesk-console#readme';
+const manualUrl =
+  'https://github.com/Globalpac/Globalpac-Remote-Console#readme';
+
+function visibleReleaseUrl(url?: string) {
+  if (!url || !/^https?:\/\//i.test(url)) return undefined;
+  try {
+    const parsed = new URL(url);
+    if (
+      parsed.hostname === 'github.com' &&
+      parsed.pathname.startsWith('/databk/')
+    ) {
+      return undefined;
+    }
+  } catch {
+    return undefined;
+  }
+  return url;
+}
 
 function reasonKey(code?: string) {
   if (!code) return 'blocked';
@@ -69,6 +86,7 @@ const UpdateCard: React.FC<{
   uncertain: boolean;
 }> = ({ title, data, uncertain }) => {
   const intl = useIntl();
+  const releaseUrl = visibleReleaseUrl(data?.release_url);
 
   if (!data) return null;
 
@@ -152,12 +170,12 @@ const UpdateCard: React.FC<{
                 </Markdown>
               </div>
             )}
-            {data.release_url && /^https?:\/\//i.test(data.release_url) && (
+            {releaseUrl && (
               <Button
                 type="link"
                 size="small"
                 icon={<LinkOutlined />}
-                href={data.release_url}
+                href={releaseUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ padding: 0, height: 'auto' }}

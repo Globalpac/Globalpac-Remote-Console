@@ -13,7 +13,7 @@ export async function chooseRecording(): Promise<{
   maxBytes: number;
   streaming: boolean;
 }> {
-  const name = `rustdesk-${new Date().toISOString().replace(/[:.]/g, '-')}.webm`;
+  const name = `globalpac-${new Date().toISOString().replace(/[:.]/g, '-')}.webm`;
   const picker = window as unknown as {
     showSaveFilePicker?: (o: {
       suggestedName: string;

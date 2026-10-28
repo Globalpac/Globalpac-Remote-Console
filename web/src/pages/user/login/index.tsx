@@ -30,8 +30,8 @@ import {
   serializeAuthenticationResponse,
 } from '@/utils/webauthn';
 import Settings from '../../../../config/defaultSettings';
-import Lang from './components/Lang';
 import ForgotPasswordModal from './components/ForgotPasswordModal';
+import Lang from './components/Lang';
 import LoginMessage from './components/LoginMessage';
 import OidcLogin from './components/OidcLogin';
 import PasskeyVerifyStep from './components/PasskeyVerifyStep';
@@ -482,8 +482,11 @@ const Login: React.FC = () => {
           form={accountForm}
           contentStyle={{ minWidth: 280, maxWidth: '75vw' }}
           logo={<img alt="logo" src="/logo.svg" />}
-          title="RustDesk Console"
-          subTitle="RustDesk Remote Desktop Management Console"
+          title={Settings.title}
+          subTitle={intl.formatMessage({
+            id: 'pages.login.subtitle',
+            defaultMessage: 'Painel de acesso remoto da Globalpac',
+          })}
           initialValues={{ rememberMe }}
           onValuesChange={(values) => {
             if (values.rememberMe !== undefined) {

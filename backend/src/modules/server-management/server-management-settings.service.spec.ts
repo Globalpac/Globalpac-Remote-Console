@@ -31,14 +31,14 @@ describe('ServerManagementSettingsService', () => {
       url: '',
       token: '',
       nodeId: 'rustdesk',
-      nodeName: 'RustDesk',
+      nodeName: 'Globalpac',
       configured: false,
     });
     await expect(service.getActiveConfig()).resolves.toEqual({
       url: undefined,
       token: '',
       nodeId: 'rustdesk',
-      nodeName: 'RustDesk',
+      nodeName: 'Globalpac',
     });
   });
 

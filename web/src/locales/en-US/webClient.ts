@@ -367,10 +367,9 @@ export default {
   'webClient.remoteVersion': 'Remote client',
   'webClient.legacyRisk':
     'This connection is encrypted, but the older method has a known risk that can weaken the privacy of transferred content.',
-  'webClient.legacyUpgrade':
-    'Update RustDesk on the remote device, then reconnect.',
+  'webClient.legacyUpgrade': 'Update the remote client, then reconnect.',
   'webClient.legacyCompatibility':
-    'RustDesk 1.4.9 uses the older method. The new method has been verified in a specific official 1.5.0 nightly build. Nightly is a development build; the version number alone does not guarantee the change.',
+    'Version 1.4.9 uses the older method. The new method has been verified in a specific official 1.5.0 nightly build. Nightly is a development build; the version number alone does not guarantee the change.',
   'webClient.cancelConnection': 'Cancel connection',
   'webClient.localFiles': 'Local files',
   'webClient.localChooseFolder': 'Choose folder',

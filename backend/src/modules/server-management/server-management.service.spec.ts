@@ -32,7 +32,7 @@ const settingsStub = (config: Partial<ServerManagementRuntimeConfig> = {}) =>
       url: config.url,
       token: config.token ?? '',
       nodeId: config.nodeId ?? 'rustdesk',
-      nodeName: config.nodeName ?? 'RustDesk',
+      nodeName: config.nodeName ?? 'Globalpac',
     }),
   }) as unknown as ServerManagementSettingsService;
 
@@ -276,7 +276,7 @@ describe('server management v2 client', () => {
     expect(result.data).toHaveLength(2);
     expect(result.data[0]).toMatchObject({
       id: 'main',
-      name: 'RustDesk',
+      name: 'Globalpac',
       reachable: true,
       api_version: 1,
       node_id: 'main',
@@ -311,7 +311,7 @@ describe('server management v2 client', () => {
   it('reports an unreachable upstream without inventing service state', async () => {
     jest.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('Offline'));
     expect(await create().list()).toEqual({
-      data: [{ id: 'main', name: 'RustDesk', reachable: false, services: [] }],
+      data: [{ id: 'main', name: 'Globalpac', reachable: false, services: [] }],
     });
   });
 

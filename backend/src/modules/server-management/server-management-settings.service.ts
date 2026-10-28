@@ -26,7 +26,7 @@ export interface ServerManagementSettingsView {
 }
 
 export const DEFAULT_NODE_ID = 'rustdesk';
-export const DEFAULT_NODE_NAME = 'RustDesk';
+export const DEFAULT_NODE_NAME = 'Globalpac';
 const NODE_ID_PATTERN = /^[a-zA-Z0-9_-]{1,64}$/;
 
 // Accepts an exact HTTP(S) origin only: no credentials, path, query or

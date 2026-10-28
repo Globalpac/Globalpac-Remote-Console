@@ -34,6 +34,7 @@ export default {
   'pages.request.noResponse': 'The server did not respond. Please try again.',
   'pages.request.error': 'The request failed. Please try again.',
   'pages.login.success': 'Login successful!',
+  'pages.login.subtitle': 'Globalpac remote access console',
   'pages.login.permissionsLoadFailed':
     'Permissions could not be loaded. Opened the personal address book; refresh to retry.',
   'pages.login.permissionsRetry': 'Retry',
@@ -539,7 +540,7 @@ export default {
   'pages.settings.generalSection.rpName': 'Relying Party Name',
   'pages.settings.generalSection.rpNameExtra':
     'Human-friendly name shown in the passkey prompt.',
-  'pages.settings.generalSection.rpNamePlaceholder': 'RustDesk Console',
+  'pages.settings.generalSection.rpNamePlaceholder': 'Globalpac Console',
   'pages.settings.generalSection.security': 'Security & Maintenance',
   'pages.settings.generalSection.jwtExpiryDays': 'JWT Token Expiry (Days)',
   'pages.settings.generalSection.jwtExpiryDaysExtra':
@@ -1282,7 +1283,7 @@ export default {
   'pages.serverManagementSettings.nodeName': 'Node Name',
   'pages.serverManagementSettings.nodeNameRequired': 'Please enter a node name',
   'pages.serverManagementSettings.nodeNameHelp':
-    'Display name of this console node, e.g. RustDesk',
+    'Display name of this console node, e.g. Globalpac',
   'pages.serverManagementSettings.tokenSyncWarning':
     'After changing the token, update SERVER_MANAGEMENT_TOKEN in the .env file of hbbs/hbbr and restart them so both sides use the same token.',
   'pages.serverManagementSettings.saveSuccess':
@@ -1295,7 +1296,7 @@ export default {
   'pages.serverManagementSettings.updatedAt': 'Updated At',
   'pages.nexus.repoRequired': 'Repository Interaction Required',
   'pages.nexus.repoRequiredDesc':
-    'You need to Star, Fork or Watch the databk/rustdesk-console repository on GitHub before generating custom clients. It may take up to 5 minutes for the cache to refresh.',
+    'Custom client generation is unavailable until the build service accepts this console. Wait a few minutes and try again.',
   'pages.nexus.goToRepo': 'Go to GitHub Repository',
   'pages.nexus.buildList': 'Build History',
   'pages.nexus.createBuild': 'Create New Client',
@@ -1346,7 +1347,7 @@ export default {
   'pages.nexus.bindGithub': 'Authorize with GitHub',
   'pages.nexus.unbind': 'Unbind',
   'pages.nexus.repoInteractionRequired':
-    'Please Star, Fork or Watch the databk/rustdesk-console repository on GitHub first. It may take up to 5 minutes for the cache to refresh.',
+    'The build service has not accepted this console yet. Wait a few minutes and try again.',
   'pages.nexus.buildAlreadyRunning': 'You already have a build in progress',
   'pages.nexus.generateFailed': 'Failed to submit build request',
   'pages.nexus.retryBuild': 'Retry',

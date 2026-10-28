@@ -99,7 +99,7 @@ export class EmailService {
       });
 
       const html = await this.renderTemplate('invitation', {
-        serviceName: 'RustDesk Console',
+        serviceName: 'Globalpac Console',
         inviteUrl,
         expiresIn,
       });
@@ -107,7 +107,7 @@ export class EmailService {
       await transporter.sendMail({
         from: config.from,
         to: email,
-        subject: 'Invitation to join RustDesk Console',
+        subject: 'Invitation to join Globalpac Console',
         html,
       });
 
@@ -147,7 +147,7 @@ export class EmailService {
       });
 
       const html = await this.renderTemplate('reset-password', {
-        serviceName: 'RustDesk Console',
+        serviceName: 'Globalpac Console',
         resetUrl,
         expiresIn,
       });
@@ -155,7 +155,7 @@ export class EmailService {
       await transporter.sendMail({
         from: config.from,
         to: email,
-        subject: 'Reset your RustDesk Console password',
+        subject: 'Reset your Globalpac Console password',
         html,
       });
 

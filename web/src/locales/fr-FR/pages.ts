@@ -31,6 +31,7 @@ export default {
   'pages.audits.webClient.endFailed':
     'Impossible de terminer la connexion. Réessayez.',
   'pages.login.success': 'Connexion réussie !',
+  'pages.login.subtitle': 'Console d’accès à distance Globalpac',
   'pages.login.failure': 'Échec de la connexion, veuillez réessayer !',
   'pages.login.username.placeholder': "Nom d'utilisateur",
   'pages.login.username.required': "Veuillez saisir votre nom d'utilisateur !",
@@ -455,7 +456,7 @@ export default {
   'pages.settings.generalSection.rpName': 'Nom de la partie prenante (RP Name)',
   'pages.settings.generalSection.rpNameExtra':
     "Nom lisible affiché lors de l'invite Passkey.",
-  'pages.settings.generalSection.rpNamePlaceholder': 'RustDesk Console',
+  'pages.settings.generalSection.rpNamePlaceholder': 'Globalpac Console',
   'pages.settings.generalSection.security': 'Sécurité et maintenance',
   'pages.settings.generalSection.jwtExpiryDays':
     'Expiration du jeton JWT (jours)',
@@ -994,7 +995,7 @@ export default {
   'pages.serverManagementSettings.nodeNameRequired':
     'Veuillez saisir un nom de nœud',
   'pages.serverManagementSettings.nodeNameHelp':
-    'Nom affiché de ce nœud de console, p. ex. RustDesk',
+    'Nom affiché de ce nœud de console, p. ex. Globalpac',
   'pages.serverManagementSettings.tokenSyncWarning':
     'Après avoir modifié le jeton, mettez à jour SERVER_MANAGEMENT_TOKEN dans le fichier .env de hbbs/hbbr et redémarrez-les afin que les deux côtés utilisent le même jeton.',
   'pages.serverManagementSettings.saveSuccess':
@@ -1007,7 +1008,7 @@ export default {
   'pages.serverManagementSettings.updatedAt': 'Mis à jour le',
   'pages.nexus.repoRequired': 'Interaction avec le dépôt requise',
   'pages.nexus.repoRequiredDesc':
-    "Vous devez ajouter une Étoile (Star), Forker ou Suivre (Watch) le dépôt databk/rustdesk-console sur GitHub avant de générer des clients personnalisés. Le rafraîchissement du cache peut prendre jusqu'à 5 minutes.",
+    'La génération de clients personnalisés reste indisponible tant que le service de build n’accepte pas cette console. Patientez quelques minutes, puis réessayez.',
   'pages.nexus.goToRepo': 'Aller au dépôt GitHub',
   'pages.nexus.buildList': 'Historique de génération',
   'pages.nexus.createBuild': 'Créer un nouveau client',
@@ -1060,7 +1061,7 @@ export default {
   'pages.nexus.bindGithub': 'Autoriser avec GitHub',
   'pages.nexus.unbind': 'Délier',
   'pages.nexus.repoInteractionRequired':
-    "Veuillez d'abord ajouter une Étoile (Star), Forker ou Suivre (Watch) le dépôt databk/rustdesk-console sur GitHub. Le rafraîchissement du cache peut prendre jusqu'à 5 minutes.",
+    'Le service de build n’a pas encore accepté cette console. Patientez quelques minutes, puis réessayez.',
   'pages.nexus.buildAlreadyRunning': 'Une génération est déjà en cours',
   'pages.nexus.generateFailed': "Échec de l'envoi de la demande de génération",
   'pages.nexus.retryBuild': 'Réessayer',

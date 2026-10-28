@@ -16,10 +16,7 @@ import { currentUser as queryCurrentUser } from '@/services/rustdesk-console/aut
 import { getMyPermissions } from '@/services/rustdesk-console/permission';
 import { getFrontendSettings } from '@/services/rustdesk-console/settings';
 import { getLoginPath, getToken, removeToken } from '@/utils/auth';
-import {
-  DEFAULT_FRONTEND_SETTINGS,
-  getUsernameWatermark,
-} from '@/utils/generalSettings';
+import { DEFAULT_FRONTEND_SETTINGS } from '@/utils/generalSettings';
 import defaultSettings from '../config/defaultSettings';
 import AuthSync from './components/AuthSync';
 import { errorConfig } from './requestErrorConfig';
@@ -148,13 +145,6 @@ export const layout: RunTimeLayoutConfig = ({
   initialState,
   setInitialState,
 }) => {
-  const frontendSettings =
-    initialState?.frontendSettings || DEFAULT_FRONTEND_SETTINGS;
-  const waterMarkProps = getUsernameWatermark(
-    frontendSettings,
-    initialState?.currentUser?.name,
-  );
-
   return {
     ...initialState?.settings,
     actionsRender: () => [
@@ -169,7 +159,6 @@ export const layout: RunTimeLayoutConfig = ({
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
       },
     },
-    ...(waterMarkProps ? { waterMarkProps } : {}),
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;

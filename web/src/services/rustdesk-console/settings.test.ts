@@ -31,7 +31,7 @@ test('uses the admin general-settings API contract', async () => {
     jwtExpiryDays: 30,
     auditRetentionDays: 0,
     site: { frontendUrl: 'https://console.example.com', backendUrl: '' },
-    webauthn: { enabled: true, rpName: 'RustDesk Console' },
+    webauthn: { enabled: true, rpName: 'Globalpac Console' },
   };
 
   await getGeneralSettings(options);

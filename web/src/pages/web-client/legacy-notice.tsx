@@ -1,5 +1,5 @@
-import React, { useEffect, useId, useRef, useState } from 'react';
 import { SafetyCertificateOutlined } from '@ant-design/icons';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import styles from './index.less';
 
 type Text = (key: string, fallback: string) => string;
@@ -86,15 +86,12 @@ export function LegacyEncryptionNotice({
           )}
         </p>
         <p>
-          {text(
-            'legacyUpgrade',
-            'Update RustDesk on the remote device, then reconnect.',
-          )}
+          {text('legacyUpgrade', 'Update the remote client, then reconnect.')}
         </p>
         <p className={styles.legacyCompatibility}>
           {text(
             'legacyCompatibility',
-            'RustDesk 1.4.9 uses the older method. The new method has been verified in a specific official 1.5.0 nightly build. Nightly is a development build; the version number alone does not guarantee the change.',
+            'Version 1.4.9 uses the older method. The new method has been verified in a specific official 1.5.0 nightly build. Nightly is a development build; the version number alone does not guarantee the change.',
           )}
         </p>
       </div>
