@@ -1,8 +1,9 @@
 {
-  "name": "RustDesk Console",
-  "short_name": "RustDesk",
-  "description": "Web frontend for RustDesk Console",
-  "lang": "en-US",
+  "name": "Globalpac Console",
+  "short_name": "Globalpac",
+  "description": "Painel de acesso remoto da Globalpac",
+  "lang": "pt-BR",
+  "id": "globalpac-console",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

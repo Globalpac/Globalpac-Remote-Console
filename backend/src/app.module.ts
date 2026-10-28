@@ -30,6 +30,7 @@ import { RbacModule } from './modules/rbac/rbac.module';
 import { RbacGuard } from './modules/rbac/guards/rbac.guard';
 import { ConsoleAuditInterceptor } from './modules/rbac/interceptors/console-audit.interceptor';
 import { WebClientModule } from './modules/web-client/web-client.module';
+import { RemotoModule } from './modules/remoto/remoto.module';
 
 /**
  * Application root module
@@ -103,6 +104,7 @@ import { WebClientModule } from './modules/web-client/web-client.module';
     RbacModule,
     ServerManagementModule,
     WebClientModule,
+    RemotoModule,
   ],
   providers: [
     {

@@ -2,6 +2,7 @@ import component from './fr-FR/component';
 import globalHeader from './fr-FR/globalHeader';
 import menu from './fr-FR/menu';
 import pages from './fr-FR/pages';
+import remoto from './fr-FR/remoto';
 import pwa from './fr-FR/pwa';
 import settingDrawer from './fr-FR/settingDrawer';
 import settings from './fr-FR/settings';
@@ -22,6 +23,7 @@ export default {
   ...pwa,
   ...component,
   ...pages,
+  ...remoto,
   ...webClient,
 };
 import serverNetwork from './fr-FR/serverNetwork';
