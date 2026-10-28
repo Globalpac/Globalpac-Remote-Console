@@ -7,13 +7,13 @@ import {
   within,
 } from '@testing-library/react';
 import { request } from '@umijs/max';
-import { checkUpdate } from '@/services/rustdesk-console/system';
 import React from 'react';
 import en from '@/locales/en-US/pwa';
-import zh from '@/locales/zh-CN/pwa';
 import fr from '@/locales/fr-FR/pwa';
 import pt from '@/locales/pt-BR/pwa';
 import ru from '@/locales/ru-RU/pwa';
+import zh from '@/locales/zh-CN/pwa';
+import { checkUpdate } from '@/services/rustdesk-console/system';
 import {
   capability,
   installationId,
@@ -21,8 +21,8 @@ import {
   jobId,
   plan,
 } from '@/services/rustdesk-console/systemUpdate.testFixtures';
-import { useSystemUpdate } from './useSystemUpdate';
 import UpdateCheckModal from './index';
+import { useSystemUpdate } from './useSystemUpdate';
 
 let mockLocale: Record<string, string> = en;
 let mockLocaleName = 'en-US';
@@ -227,7 +227,7 @@ test.each([
         .hasAttribute('disabled'),
     ).toBe(false);
     expect(view.queryByRole('checkbox')).toBeNull();
-    expect(view.getAllByRole('link')).toHaveLength(2);
+    expect(view.queryAllByRole('link')).toHaveLength(0);
     expect(view.queryByRole('alertdialog')).toBeNull();
     expect(submissions()).toHaveLength(0);
     expect(view.getAllByText(nextPlan.components[0].target)).toHaveLength(2);
@@ -441,8 +441,8 @@ test('official component cards show matching published notes and localized relea
   await settle();
   expect(view.getAllByRole('region')).toHaveLength(2);
   expect(
-    view.getAllByRole('link', { name: zh['app.updateCheck.viewRelease'] }),
-  ).toHaveLength(2);
+    view.queryAllByRole('link', { name: zh['app.updateCheck.viewRelease'] }),
+  ).toHaveLength(0);
   expect(view.getByText('后端更新内容')).toBeTruthy();
   expect(view.getByText('前端更新内容')).toBeTruthy();
   expect(

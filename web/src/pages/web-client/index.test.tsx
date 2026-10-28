@@ -2304,7 +2304,7 @@ test('文件窗口隐藏后仍显示属于文件会话的旧协议与错误', as
   fireEvent.click(warning);
   expect(
     screen
-      .getAllByText(/RustDesk 1.4.9 uses the older method/)
+      .getAllByText(/Version 1.4.9 uses the older method/)
       .some((e) => !e.closest('[hidden]')),
   ).toBe(true);
   expect(

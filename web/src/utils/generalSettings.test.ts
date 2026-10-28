@@ -1,10 +1,10 @@
 import { expect, test } from '@jest/globals';
 import { getUsernameWatermark, toFrontendSettings } from './generalSettings';
 
-test('includes the username watermark only when enabled', () => {
-  expect(getUsernameWatermark({ watermarkEnabled: true }, 'alice')).toEqual({
-    content: 'alice',
-  });
+test('never paints a tiled username watermark', () => {
+  expect(
+    getUsernameWatermark({ watermarkEnabled: true }, 'alice'),
+  ).toBeUndefined();
   expect(
     getUsernameWatermark({ watermarkEnabled: false }, 'alice'),
   ).toBeUndefined();
@@ -23,7 +23,7 @@ test('maps general settings to frontend settings', () => {
       frontendUrl: 'https://a.example.com',
       backendUrl: 'https://b.example.com',
     },
-    webauthn: { enabled: true, rpName: 'RustDesk Console' },
+    webauthn: { enabled: true, rpName: 'Globalpac Console' },
   };
   expect(toFrontendSettings(general)).toEqual({
     watermarkEnabled: true,

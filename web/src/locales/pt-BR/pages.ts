@@ -39,6 +39,7 @@ export default {
     'O servidor não respondeu. Tente novamente mais tarde.',
   'pages.request.error': 'Falha na solicitação. Tente novamente mais tarde.',
   'pages.login.success': 'Login realizado com sucesso!',
+  'pages.login.subtitle': 'Painel de acesso remoto da Globalpac',
   'pages.login.permissionsLoadFailed':
     'Não foi possível carregar as permissões. O catálogo de endereços pessoal foi aberto; atualize a página para tentar novamente.',
   'pages.login.permissionsRetry': 'Tentar novamente',
@@ -567,7 +568,7 @@ export default {
   'pages.settings.generalSection.rpName': 'Nome da Parte Confiável',
   'pages.settings.generalSection.rpNameExtra':
     'Nome amigável exibido no prompt de passkey.',
-  'pages.settings.generalSection.rpNamePlaceholder': 'RustDesk Console',
+  'pages.settings.generalSection.rpNamePlaceholder': 'Globalpac Console',
   'pages.settings.generalSection.security': 'Segurança e Manutenção',
   'pages.settings.generalSection.jwtExpiryDays':
     'Expiração do Token JWT (Dias)',
@@ -1346,7 +1347,7 @@ export default {
   'pages.serverManagementSettings.nodeName': 'Nome do Nó',
   'pages.serverManagementSettings.nodeNameRequired': 'Informe um nome de nó',
   'pages.serverManagementSettings.nodeNameHelp':
-    'Nome de exibição deste nó do console, ex.: RustDesk',
+    'Nome de exibição deste nó do console, ex.: Globalpac',
   'pages.serverManagementSettings.tokenSyncWarning':
     'Após alterar o token, atualize o SERVER_MANAGEMENT_TOKEN no arquivo .env do hbbs/hbbr e reinicie-os para que ambos os lados usem o mesmo token.',
   'pages.serverManagementSettings.saveSuccess':
@@ -1359,7 +1360,7 @@ export default {
   'pages.serverManagementSettings.updatedAt': 'Atualizado em',
   'pages.nexus.repoRequired': 'Interação com Repositório Necessária',
   'pages.nexus.repoRequiredDesc':
-    'Você precisa dar Star, Fork ou Watch no repositório databk/rustdesk-console no GitHub antes de gerar clientes personalizados. Pode levar até 5 minutos para o cache ser atualizado.',
+    'A geração de clientes personalizados fica indisponível até o serviço de build aceitar este console. Aguarde alguns minutos e tente de novo.',
   'pages.nexus.goToRepo': 'Ir para o Repositório GitHub',
   'pages.nexus.buildList': 'Histórico de Builds',
   'pages.nexus.createBuild': 'Criar Novo Cliente',
@@ -1410,7 +1411,7 @@ export default {
   'pages.nexus.bindGithub': 'Autorizar com GitHub',
   'pages.nexus.unbind': 'Desvincular',
   'pages.nexus.repoInteractionRequired':
-    'Por favor, dê Star, Fork ou Watch no repositório databk/rustdesk-console no GitHub primeiro. Pode levar até 5 minutos para o cache ser atualizado.',
+    'O serviço de build ainda não aceitou este console. Aguarde alguns minutos e tente de novo.',
   'pages.nexus.buildAlreadyRunning': 'Você já tem um build em andamento',
   'pages.nexus.generateFailed': 'Falha ao enviar solicitação de build',
   'pages.nexus.retryBuild': 'Tentar Novamente',

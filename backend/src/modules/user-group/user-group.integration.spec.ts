@@ -158,7 +158,7 @@ describe('User group integration', () => {
             effectiveBackendUrl: 'http://localhost:3000',
           }),
         getWebAuthnSettings: () =>
-          Promise.resolve({ enabled: true, rpName: 'RustDesk Console' }),
+          Promise.resolve({ enabled: true, rpName: 'Globalpac Console' }),
       } as unknown as GeneralSettingsService,
       dataSource,
       authorizationService as unknown as RbacAuthorizationService,

@@ -80,7 +80,7 @@ export class AuthTfaService {
     }
 
     const secret = authenticator.generateSecret();
-    const otpauthUrl = authenticator.keyuri(user.username, 'RustDesk', secret);
+    const otpauthUrl = authenticator.keyuri(user.username, 'Globalpac', secret);
 
     userInfo.other = userInfo.other || {};
     userInfo.other.tfa_pending_secret = secret;

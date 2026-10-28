@@ -382,9 +382,9 @@ export default {
   'webClient.legacyRisk':
     'La connexion est chiffrée, mais l’ancienne méthode présente un risque connu qui peut réduire la confidentialité des données transférées.',
   'webClient.legacyUpgrade':
-    'Mettez à jour RustDesk sur l’appareil distant, puis reconnectez-vous.',
+    'Mettez à jour le client sur l’appareil distant, puis reconnectez-vous.',
   'webClient.legacyCompatibility':
-    'RustDesk 1.4.9 utilise l’ancienne méthode. La nouvelle méthode a été vérifiée dans une version nightly officielle précise de 1.5.0. Une nightly est une version de développement ; le numéro seul ne garantit pas la modification.',
+    'La version 1.4.9 utilise l’ancienne méthode. La nouvelle méthode a été vérifiée dans une version nightly officielle précise de 1.5.0. Une nightly est une version de développement ; le numéro seul ne garantit pas la modification.',
   'webClient.cancelConnection': 'Annuler la connexion',
   'webClient.localFiles': 'Fichiers locaux',
   'webClient.localChooseFolder': 'Choisir un dossier',

@@ -1,7 +1,6 @@
 import {
   FieldTimeOutlined,
   GlobalOutlined,
-  HighlightOutlined,
   LinkOutlined,
   SafetyOutlined,
   SaveOutlined,
@@ -28,11 +27,11 @@ import {
   getGeneralSettings,
   updateGeneralSettings,
 } from '@/services/rustdesk-console/settings';
-import { isWebAuthnSupported } from '@/utils/webauthn';
 import {
   DEFAULT_GENERAL_SETTINGS,
   toFrontendSettings,
 } from '@/utils/generalSettings';
+import { isWebAuthnSupported } from '@/utils/webauthn';
 
 const { Title } = Typography;
 
@@ -94,39 +93,6 @@ const GeneralSettings: React.FC = () => {
       setSaving(false);
     }
   };
-
-  const watermarkCard = (
-    <Card
-      title={
-        <Space>
-          <HighlightOutlined />
-          <FormattedMessage
-            id="pages.settings.generalSection.watermark"
-            defaultMessage="Username Watermark"
-          />
-        </Space>
-      }
-    >
-      <Form.Item
-        name="watermarkEnabled"
-        label={
-          <FormattedMessage
-            id="pages.settings.generalSection.watermark"
-            defaultMessage="Username Watermark"
-          />
-        }
-        valuePropName="checked"
-        extra={
-          <FormattedMessage
-            id="pages.settings.generalSection.watermarkExtra"
-            defaultMessage="Overlay the current username on each page for accountability."
-          />
-        }
-      >
-        <Switch />
-      </Form.Item>
-    </Card>
-  );
 
   const languageCard = (
     <Card
@@ -299,7 +265,7 @@ const GeneralSettings: React.FC = () => {
           disabled={!webauthnEnabled}
           placeholder={intl.formatMessage({
             id: 'pages.settings.generalSection.rpNamePlaceholder',
-            defaultMessage: 'RustDesk Console',
+            defaultMessage: 'Globalpac Console',
           })}
         />
       </Form.Item>
@@ -400,7 +366,6 @@ const GeneralSettings: React.FC = () => {
   );
 
   const masonryItems = [
-    { key: 'watermark', data: 'watermark', children: watermarkCard },
     { key: 'language', data: 'language', children: languageCard },
     { key: 'site', data: 'site', children: siteCard },
     { key: 'webauthn', data: 'webauthn', children: webauthnCard },
@@ -424,6 +389,9 @@ const GeneralSettings: React.FC = () => {
           onFinish={handleSave}
           requiredMark={false}
         >
+          <Form.Item name="watermarkEnabled" valuePropName="checked" hidden>
+            <Switch />
+          </Form.Item>
           <Masonry
             columns={{ xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl: 2 }}
             gutter={24}

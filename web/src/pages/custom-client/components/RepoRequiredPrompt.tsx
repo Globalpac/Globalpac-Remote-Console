@@ -1,6 +1,6 @@
-import { GithubOutlined, ReloadOutlined } from '@ant-design/icons';
+import { ReloadOutlined } from '@ant-design/icons';
 import { FormattedMessage, useIntl } from '@umijs/max';
-import { Alert, Button, Result, Space } from 'antd';
+import { Button, Result } from 'antd';
 import React from 'react';
 
 interface RepoRequiredPromptProps {
@@ -24,7 +24,7 @@ const RepoRequiredPrompt: React.FC<RepoRequiredPromptProps> = ({
       }}
     >
       <Result
-        icon={<GithubOutlined style={{ color: '#faad14', fontSize: 72 }} />}
+        status="warning"
         title={intl.formatMessage({
           id: 'pages.nexus.repoRequired',
           defaultMessage: 'Repository Interaction Required',
@@ -32,50 +32,20 @@ const RepoRequiredPrompt: React.FC<RepoRequiredPromptProps> = ({
         subTitle={intl.formatMessage({
           id: 'pages.nexus.repoRequiredDesc',
           defaultMessage:
-            'You need to Star, Fork or Watch the databk/rustdesk-console repository on GitHub before generating custom clients. It may take up to 5 minutes for the cache to refresh.',
+            'Custom client generation is unavailable until the build service accepts this console. Wait a few minutes and try again.',
         })}
         extra={
-          <Space
-            orientation="vertical"
+          <Button
             size="large"
-            style={{ alignItems: 'center' }}
+            icon={<ReloadOutlined />}
+            loading={buildAgainLoading}
+            onClick={onBuildAgain}
           >
-            <Alert
-              type="info"
-              showIcon
-              style={{ maxWidth: 560, textAlign: 'left' }}
-              title={intl.formatMessage({
-                id: 'pages.nexus.repoWhyInteract',
-                defaultMessage:
-                  "I'm a high school student developing this project in my spare time. Your Star, Fork, or Watch means a lot to me - it not only keeps me motivated, but also helps with my college applications. This is the only thing I ask for in return. Thank you so much for your support!",
-              })}
+            <FormattedMessage
+              id="pages.nexus.buildAgain"
+              defaultMessage="Build Again"
             />
-            <Space>
-              <Button
-                type="primary"
-                size="large"
-                icon={<GithubOutlined />}
-                href="https://github.com/databk/rustdesk-console"
-                target="_blank"
-              >
-                <FormattedMessage
-                  id="pages.nexus.goToRepo"
-                  defaultMessage="Go to GitHub Repository"
-                />
-              </Button>
-              <Button
-                size="large"
-                icon={<ReloadOutlined />}
-                loading={buildAgainLoading}
-                onClick={onBuildAgain}
-              >
-                <FormattedMessage
-                  id="pages.nexus.buildAgain"
-                  defaultMessage="Build Again"
-                />
-              </Button>
-            </Space>
-          </Space>
+          </Button>
         }
       />
     </div>

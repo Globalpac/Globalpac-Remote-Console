@@ -23,7 +23,7 @@ const settingsStub = (config: Partial<ServerManagementRuntimeConfig> = {}) =>
       url: config.url,
       token: config.token ?? '',
       nodeId: config.nodeId ?? 'rustdesk',
-      nodeName: config.nodeName ?? 'RustDesk',
+      nodeName: config.nodeName ?? 'Globalpac',
     }),
   }) as unknown as ServerManagementSettingsService;
 

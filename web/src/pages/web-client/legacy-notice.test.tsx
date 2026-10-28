@@ -1,11 +1,11 @@
 import { afterEach, expect, test } from '@jest/globals';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { LegacyEncryptionNotice } from './legacy-notice';
-import zh from '../../locales/zh-CN/webClient';
 import en from '../../locales/en-US/webClient';
 import pt from '../../locales/pt-BR/webClient';
 import ru from '../../locales/ru-RU/webClient';
+import zh from '../../locales/zh-CN/webClient';
+import { LegacyEncryptionNotice } from './legacy-notice';
 
 afterEach(cleanup);
 
@@ -21,7 +21,7 @@ test.each(['desktop', 'files'] as const)(
     const note = screen.getByRole('note');
     expect(note.querySelector('strong')?.textContent).toBe('旧版加密');
     expect(note.textContent).toContain('连接仍已加密');
-    expect(note.textContent).toContain('更新远端 RustDesk');
+    expect(note.textContent).toContain('更新远端客户端');
     expect(note.textContent).toContain('1.4.9');
     expect(note.textContent).toContain('nightly 是开发版');
     expect(note.textContent).not.toMatch(/SHA|dc446|核验日期|为什么显示/);

@@ -27,6 +27,7 @@ export default {
   'pages.request.noResponse': '服务器未响应，请稍后重试',
   'pages.request.error': '请求失败，请稍后重试',
   'pages.login.success': '登录成功！',
+  'pages.login.subtitle': 'Globalpac 远程访问控制台',
   'pages.login.permissionsLoadFailed':
     '权限加载失败，已进入个人地址簿；请刷新页面重试。',
   'pages.login.permissionsRetry': '重试',
@@ -497,7 +498,7 @@ export default {
     '当前浏览器不支持 WebAuthn。在不支持的客户端上，通行密钥登录将不可用。',
   'pages.settings.generalSection.rpName': '依赖方名称',
   'pages.settings.generalSection.rpNameExtra': '通行密钥提示中展示的友好名称。',
-  'pages.settings.generalSection.rpNamePlaceholder': 'RustDesk Console',
+  'pages.settings.generalSection.rpNamePlaceholder': 'Globalpac Console',
   'pages.settings.generalSection.security': '安全与维护',
   'pages.settings.generalSection.jwtExpiryDays': 'JWT Token 有效期（天）',
   'pages.settings.generalSection.jwtExpiryDaysExtra':
@@ -1167,7 +1168,7 @@ export default {
   'pages.serverManagementSettings.nodeName': '节点名称',
   'pages.serverManagementSettings.nodeNameRequired': '请输入节点名称',
   'pages.serverManagementSettings.nodeNameHelp':
-    '当前控制台节点的显示名称，例如 RustDesk',
+    '当前控制台节点的显示名称，例如 Globalpac',
   'pages.serverManagementSettings.tokenSyncWarning':
     '修改令牌后，请同步更新 hbbs/hbbr 的 .env 文件中的 SERVER_MANAGEMENT_TOKEN 并重启服务，确保两侧令牌一致。',
   'pages.serverManagementSettings.saveSuccess': '服务器管理配置保存成功',
@@ -1177,7 +1178,7 @@ export default {
   'pages.serverManagementSettings.updatedAt': '更新时间',
   'pages.nexus.repoRequired': '需要仓库互动',
   'pages.nexus.repoRequiredDesc':
-    '您需要对 databk/rustdesk-console GitHub 仓库进行 Star、Fork 或 Watch 操作后才能生成自定义客户端。操作后最长需等待 5 分钟缓存刷新。',
+    '在构建服务接受此控制台之前，无法生成自定义客户端。请等待几分钟后重试。',
   'pages.nexus.goToRepo': '前往 GitHub 仓库',
   'pages.nexus.buildList': '构建历史',
   'pages.nexus.createBuild': '创建新客户端',
@@ -1227,7 +1228,7 @@ export default {
   'pages.nexus.bindGithub': '通过 GitHub 授权',
   'pages.nexus.unbind': '解绑',
   'pages.nexus.repoInteractionRequired':
-    '请先对 databk/rustdesk-console 仓库进行 Star、Fork 或 Watch 操作。操作后最长需等待 5 分钟缓存刷新。',
+    '构建服务尚未接受此控制台。请等待几分钟后重试。',
   'pages.nexus.buildAlreadyRunning': '已有一个正在进行的构建任务',
   'pages.nexus.generateFailed': '提交构建请求失败',
   'pages.nexus.retryBuild': '重试',

@@ -4,7 +4,7 @@ import {
   WarningOutlined,
 } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { useIntl, FormattedMessage } from '@umijs/max';
+import { FormattedMessage, useIntl } from '@umijs/max';
 import {
   Alert,
   Button,
@@ -76,7 +76,7 @@ const ServerManagementSettings: React.FC = () => {
         url: config.url || '',
         token: config.token || '',
         nodeId: config.nodeId || 'rustdesk',
-        nodeName: config.nodeName || 'RustDesk',
+        nodeName: config.nodeName || 'Globalpac',
       });
     } catch (error) {
       console.error('Failed to fetch server management settings:', error);
@@ -190,7 +190,7 @@ const ServerManagementSettings: React.FC = () => {
               url: '',
               token: '',
               nodeId: 'rustdesk',
-              nodeName: 'RustDesk',
+              nodeName: 'Globalpac',
             }}
           >
             <Form.Item
@@ -337,11 +337,11 @@ const ServerManagementSettings: React.FC = () => {
               extra={
                 <FormattedMessage
                   id="pages.serverManagementSettings.nodeNameHelp"
-                  defaultMessage="Display name of this console node, e.g. RustDesk"
+                  defaultMessage="Display name of this console node, e.g. Globalpac"
                 />
               }
             >
-              <Input placeholder="RustDesk" />
+              <Input placeholder="Globalpac" />
             </Form.Item>
 
             <Alert

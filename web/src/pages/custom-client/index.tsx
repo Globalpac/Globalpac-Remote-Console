@@ -1,8 +1,8 @@
+import { LoadingOutlined } from '@ant-design/icons';
 import type { ActionType } from '@ant-design/pro-components';
 import { PageContainer } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import { App, Space, Tag } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   createNexusLogin,
@@ -12,12 +12,12 @@ import {
   submitBuild,
   unbindNexus,
 } from '@/services/rustdesk-console/nexus';
-import { SERVER_FIELDS, type PageState } from './constants';
 import BindPrompt from './components/BindPrompt';
-import TokenExpiredPrompt from './components/TokenExpiredPrompt';
-import RepoRequiredPrompt from './components/RepoRequiredPrompt';
 import BuildList from './components/BuildList';
 import CreateBuildModal from './components/CreateBuildModal';
+import RepoRequiredPrompt from './components/RepoRequiredPrompt';
+import TokenExpiredPrompt from './components/TokenExpiredPrompt';
+import { type PageState, SERVER_FIELDS } from './constants';
 
 const CustomClientPage: React.FC = () => {
   const intl = useIntl();
@@ -274,7 +274,7 @@ const CustomClientPage: React.FC = () => {
             intl.formatMessage({
               id: 'pages.nexus.repoInteractionRequired',
               defaultMessage:
-                'Please Star, Fork or Watch the databk/rustdesk-console repository on GitHub first. It may take up to 5 minutes for the cache to refresh.',
+                'The build service has not accepted this console yet. Wait a few minutes and try again.',
             }),
           );
         } else if (

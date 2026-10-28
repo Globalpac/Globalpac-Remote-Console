@@ -36,6 +36,7 @@ export default {
   'pages.request.error':
     'Не удалось выполнить запрос. Повторите попытку позже.',
   'pages.login.success': 'Вход выполнен успешно!',
+  'pages.login.subtitle': 'Консоль удалённого доступа Globalpac',
   'pages.login.permissionsLoadFailed':
     'Не удалось загрузить права. Открыта личная адресная книга; обновите страницу, чтобы повторить попытку.',
   'pages.login.permissionsRetry': 'Повторить',
@@ -563,7 +564,7 @@ export default {
   'pages.settings.generalSection.rpName': 'Название полагающейся стороны',
   'pages.settings.generalSection.rpNameExtra':
     'Понятное пользователю название, отображаемое в запросе на использование passkey.',
-  'pages.settings.generalSection.rpNamePlaceholder': 'RustDesk Console',
+  'pages.settings.generalSection.rpNamePlaceholder': 'Globalpac Console',
   'pages.settings.generalSection.security': 'Безопасность и обслуживание',
   'pages.settings.generalSection.jwtExpiryDays':
     'Срок действия JWT-токена (дни)',
@@ -1350,7 +1351,7 @@ export default {
   'pages.serverManagementSettings.nodeName': 'Название узла',
   'pages.serverManagementSettings.nodeNameRequired': 'Введите название узла',
   'pages.serverManagementSettings.nodeNameHelp':
-    'Отображаемое название этого узла консоли, напр. RustDesk',
+    'Отображаемое название этого узла консоли, напр. Globalpac',
   'pages.serverManagementSettings.tokenSyncWarning':
     'После изменения токена обновите SERVER_MANAGEMENT_TOKEN в файле .env для hbbs/hbbr и перезапустите их, чтобы обе стороны использовали один и тот же токен.',
   'pages.serverManagementSettings.saveSuccess':
@@ -1363,7 +1364,7 @@ export default {
   'pages.serverManagementSettings.updatedAt': 'Дата обновления',
   'pages.nexus.repoRequired': 'Требуется взаимодействие с репозиторием',
   'pages.nexus.repoRequiredDesc':
-    'Вам необходимо поставить Star, Fork или Watch на репозиторий databk/rustdesk-console на GitHub перед генерацией пользовательских клиентов. Обновление кеша может занять до 5 минут.',
+    'Создание пользовательских клиентов недоступно, пока служба сборки не примет эту консоль. Подождите несколько минут и повторите попытку.',
   'pages.nexus.goToRepo': 'Перейти в репозиторий GitHub',
   'pages.nexus.buildList': 'История сборок',
   'pages.nexus.createBuild': 'Создать новый клиент',
@@ -1414,7 +1415,7 @@ export default {
   'pages.nexus.bindGithub': 'Авторизоваться через GitHub',
   'pages.nexus.unbind': 'Отвязать',
   'pages.nexus.repoInteractionRequired':
-    'Пожалуйста, поставьте Star, Fork или Watch на репозиторий databk/rustdesk-console на GitHub. Обновление кеша может занять до 5 минут.',
+    'Служба сборки ещё не приняла эту консоль. Подождите несколько минут и повторите попытку.',
   'pages.nexus.buildAlreadyRunning': 'У вас уже есть сборка в процессе',
   'pages.nexus.generateFailed': 'Не удалось отправить запрос на сборку',
   'pages.nexus.retryBuild': 'Повторить',
